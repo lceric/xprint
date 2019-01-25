@@ -27,6 +27,9 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+    <div class="panel">
+      <test-app></test-app>
+    </div>
   </div>
 </template>
 
@@ -41,6 +44,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.panel {
+  width: 200px;
+  height: 300px;
+  border: 1px solide #dddddd;
+}
 h3 {
   margin: 40px 0 0;
 }
