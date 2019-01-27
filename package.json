@@ -1,6 +1,6 @@
 {
   "name": "xprint",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -10,7 +10,7 @@
   "dependencies": {
     "vue": "^2.5.21"
   },
-  "main": "dist/vue-print.common.js",
+  "main": "dist/vue-xprint.common.js",
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.3.0",
     "@vue/cli-plugin-eslint": "^3.3.0",
