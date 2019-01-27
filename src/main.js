@@ -1,21 +1,21 @@
-import HelloWorld from './components/HelloWorld.vue'
-// const MyPlugin = {}
-// MyPlugin.install = function (Vue) {
-//   console.log(Vue)
-//   Vue.mixin({
-//     created() {
-//       localStorage.setItem('created', '测试插件')
-//     }
-//   })
-//   Vue.prototype.$test = function (methodOpts) {
-//     if (methodOpts) {
-//       localStorage.setItem('created', methodOpts)
-//     }
-//     localStorage.setItem('created', '欢迎使用测试方法')
-//   }
-//   Vue.component('test-app', HelloWorld)
-// }
-
-export default {
-  HelloWorld
+import Page from './components/Page.vue'
+const XPrint = {}
+import './style/index.css'
+XPrint.install = function (Vue, options = {}) {
+  options.model = options.model || 'normal'
+  if (options.model === 'normal') {
+    document.body.classList.add('xprint-wrapper')
+  }
+  Vue.prototype.$xprint = function () {
+    if (options.beforePrint && options.beforePrint instanceof Function) {
+      options.beforePrint.bind(this) && options.beforePrint()
+    }
+    window.print()
+    if (options.afterPrint && options.afterPrint instanceof Function) {
+      options.afterPrint.bind(this) && options.afterPrint()
+    }
+  }
+  Vue.component('xpage', Page)
 }
+
+export default XPrint

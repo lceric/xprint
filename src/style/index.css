@@ -1,0 +1,28 @@
+
+.xprint-wrapper {
+  min-width: 1150px;
+  width: 1150px;
+  margin: 0 auto;
+}
+.xprint-container {
+  width: 1150px;
+  margin: 0 auto;
+}
+.xprint-page {
+  box-sizing: border-box;
+  width: 1150px;
+  height: 1627px;
+  page-break-before: always
+}
+.xprint-white {
+  margin-top: 16px;
+}
+@media print {
+  @page  {
+    size: A4 portrait;
+    margin: 0;
+  }
+  .xprint-white {
+    margin-top: 0;
+  }
+}
