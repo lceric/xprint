@@ -1,0 +1,31 @@
+
+.xprint-wrapper {
+  /* min-width: 60mm;
+  width: 60mm; */
+  margin: 0 auto;
+}
+.xprint-container {
+  width: 60mm;
+  margin: 0 auto;
+}
+.xprint-tag-page {
+  width: 60mm;
+  height: 50mm;
+  background: #ff0;
+  page-break-before: always
+}
+.xprint-white {
+  margin-top: 16px;
+}
+@media print {
+  @page {
+    size: 60mm 50mm;
+    margin: 0;
+  }
+  .xprint-tag-page {
+    background: #ff0; 
+  }
+  .xprint-white {
+    margin-top: 0;
+  }
+}
