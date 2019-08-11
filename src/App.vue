@@ -3,7 +3,7 @@
     <button class="print-handler" @click="printHandler">打印</button>
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <div id="xprintContainer" class="xprint-container example-container">
-      <Page class="xprint-page">
+      <!-- <Page class="xprint-page">
         <h2 class="example-h2">XPrint</h2>
         <dl class="example-dl">
           <dt class="example-dt">下载</dt>
@@ -14,11 +14,6 @@
           <dd class="example-dd">
             <p class="example-p">import XPrint from 'xprint'</p>
             <p class="example-p">Vue.use(XPrint)</p>
-          </dd>
-          <dt class="example-dt">示例</dt>
-          <dd class="example-dd">
-            <!-- <p class="example-p">import XPrint from 'xprint'</p>
-            <p class="example-p">Vue.use(XPrint)</p> -->
           </dd>
         </dl>
 
@@ -31,6 +26,17 @@
             <p class="example-p">white: true默认false</p>
           </dd>
         </dl>
+      </Page> -->
+      <Page class="xprint-page" white v-print="printCore">
+        <h2 class="example-h2">XPrint配置</h2>
+        <div data-list="wrapper" v-for="i in 20" :key="i">
+          <dl class="example-dl" data-list="wrapper-item">
+            <dt class="example-dt">white页间距</dt>
+            <dd class="example-dd" data-sub="wrapper-item-sub">
+              <p class="example-p">white: true默认false</p>
+            </dd>
+          </dl>
+        </div>
       </Page>
     </div>
 
@@ -39,14 +45,17 @@
 
 <script>
 import Page from './components/Page.vue'
-
+import Print from './directive/print'
 export default {
   name: 'app',
   components: {
     Page
   },
+  directives: {
+    Print
+  },
   created() {
-    console.log(document.body)
+    // console.log(document.body)
   },
   mounted() {
     document.body && document.body.classList.add('xprint-wrapper')
@@ -54,6 +63,32 @@ export default {
   methods: {
     printHandler() {
       window.print()
+    },
+    printCore() {
+      console.log('print-core')
+      // TODO 循环列表计算高度，分页
+      /**
+       * 1. 获取容器之前同级元素的高度 [PRE DOMLIST]
+       *    <Page> [PRE DOMLIST] LIST [SUB DOMLIST] </Page>
+       * 2. PAGE的高度 - [PRE DOMLIST]的高度
+       *    得到LIST的实际可用高度
+       * 3. 依次计算LIST ITEM 的高度 itemH
+       *    a.计算出第一个高度 itemH
+       *      [判断 A]判断是否超出实际可用高度
+       *          --超出-->   换页
+       *          --未超出--> 继续下一个计算
+       *    b.计算下一个 itemH += itemH
+       *      [判断 A]
+       *    c.执行b
+       */
+      return {
+        // 设置分页的容器标识
+        list: 'wrapper',
+        // 设置单个容器
+        item: 'wrapper-item',
+        // 设置单个容器下级可分标识
+        subItem: 'wrapper-item-sub'
+      }
     }
   }
 }
